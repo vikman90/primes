@@ -14,16 +14,20 @@ SRC = .
 CXX			= g++
 CXXFLAGS	= -pipe -Wall -O3 -fopenmp
 LIBS		= -lsqlite3
+MKDIR		= mkdir -p
 RMFILE		= rm -f
 
 TARGET	= $(BIN)/list $(BIN)/primeq $(BIN)/eratosthenes
 
-.PHONY: all clean
+.PHONY: all pre clean
 
 $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-all: $(TARGET)
+all: pre $(TARGET)
+
+pre:
+	$(MKDIR) $(BIN)
 
 clean:
 	$(RMFILE) $(TARGET)
