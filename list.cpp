@@ -15,6 +15,7 @@
 #include <cstring>
 #include <vector>
 #include <omp.h>
+#include <regex>
 
 #define OUTPUT_FILENAME "output.txt"
 #define OUTPUT_DATABASE "output.db"
@@ -41,6 +42,11 @@ int main(int argc, char **argv) {
 			output = OUTPUT_FILE;
 		else if (!strcmp(argv[i], "-out=sqlite"))
 			output = OUTPUT_SQLITE;
+		else if (regex_match (argv[i], regex("(-out=)(.*)") )) {
+			cerr << "Valor incorrecto para -out." << endl
+				 << "Los valores aceptados son sqlite, file y off" << endl;
+			exit(-1);
+		}
 		else if (!strcmp(argv[i], "--help")) {
 			cout << "Sintaxis: " << argv[0] << " [-seq] [-out=off|file|sqlite] <max>\n";
 			return EXIT_SUCCESS;
