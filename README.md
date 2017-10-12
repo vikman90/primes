@@ -58,3 +58,29 @@ $ cat output.txt
 5
 7
 ```
+
+## Benchmark
+Si quieres poner a prueba tu ordenador, prueba a ejecutar el benchmark:
+```shellsession
+$ chmod +x benchmark.py
+$ ./benchmark.py -h
+usage: benchmark.py [options]
+
+Ejecuta un benchmark con distintas versiones del algoritmo.
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --begin BEGIN  Número desde el que empezar el test
+  --end END      Número desde el que acabar el test
+  --step STEP    Número por el que incrementar el test
+  --style STYLE  Estilo de la gráfica final
+```
+
+Una gráfica mostrando los tiempos de ejecución de cada versión (paralela, secuencial y la criba original) se guarda en el archivo `time_compare.png`. Puedes seleccionar el estilo de la gráfica de entre todos estos:
+
+```python
+>>> import matplotlib.pyplot as plt
+>>> print(plt.style.available)
+['ggplot', 'seaborn-ticks', 'seaborn-dark-palette', 'seaborn-whitegrid', 'fivethirtyeight', 'seaborn-dark', 'seaborn-notebook', 'seaborn-bright', 'classic', 'dark_background', 'bmh', 'seaborn-colorblind', 'seaborn-darkgrid', 'seaborn-paper', 'seaborn-deep', 'grayscale', 'seaborn-muted', 'seaborn-poster', 'seaborn-talk', 'seaborn-pastel', 'seaborn-white']
+```
+Si ningún estilo se selecciona, se elige uno aleatorio.
