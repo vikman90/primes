@@ -11,7 +11,7 @@
 BIN = bin
 SRC = .
 
-CXX			= g++
+CXX			= g++ -std=c++11
 CXXFLAGS	= -pipe -Wall -O3 -fopenmp
 LIBS		= -lsqlite3
 MKDIR		= mkdir -p
