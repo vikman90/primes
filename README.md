@@ -4,7 +4,7 @@ Búsqueda paralela de números primos.
 Para más información sobre este proyecto visita [mi blog](https://vikman90.blogspot.com.es/2014/01/busqueda-paralela-de-numeros-primos.html).
 
 ## Dependencias
-Para compilar este proyecto, el paquete de desarrollo para _SQLite3_ debe estar instalado.
+Para compilar este proyecto, el paquete de desarrollo para _SQLite3_ debe estar instalado. _Pandas_ se utiliza para ejecutar el benchmark en Pyton.
 
 ### Ubuntu
 ```shellsession
