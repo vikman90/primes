@@ -8,16 +8,21 @@ Para compilar este proyecto, el paquete de desarrollo para _SQLite3_ debe estar 
 
 ### Ubuntu
 ```shellsession
-$ sudo apt install libsqlite3-dev
+$ sudo apt install libsqlite3-dev python3-pandas
 ```
 
 ### CentOS
 ```shellsession
-$ sudo yum install sqlite-devel
+$ sudo yum update
+$ sudo yum install sqlite-devel 
+$ sudo yum install epel-release
+$ sudo yum install python-pandas
 ```
 
 ### Arch linux
-No es necesario instalar ningún paquete extra para compilar en _Arch Linux_.
+```shellsession
+$ sudo pacman -S python-pandas
+```
 
 ## Compilación
 Para compilar el programa, usa el _Makefile_ disponible:
