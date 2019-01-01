@@ -1,4 +1,7 @@
 # Primes
+
+[![Build Status](https://travis-ci.org/vikman90/primes.svg?branch=master)](https://travis-ci.org/vikman90/primes)
+
 Búsqueda paralela de números primos.
 
 Para más información sobre este proyecto visita [mi blog](https://vikman90.blogspot.com.es/2014/01/busqueda-paralela-de-numeros-primos.html).
@@ -14,7 +17,7 @@ $ sudo apt install libsqlite3-dev python3-pandas
 ### CentOS
 ```shellsession
 $ sudo yum update
-$ sudo yum install sqlite-devel 
+$ sudo yum install sqlite-devel
 $ sudo yum install epel-release
 $ sudo yum install python-pandas
 ```
@@ -33,7 +36,7 @@ $ make
 ## Ejecución
 Para ejecutar el programa, usa el binario `list` disponible en el directorio `bin`:
 ```shellsession
-$ bin/list [-seq] [-out=off|sqlite|file] <number> 
+$ bin/list [-seq] [-out=off|sqlite|file] <number>
 ```
 
 * La opción `-seq` se usa para ejecutar el programa en modo secuencial.
