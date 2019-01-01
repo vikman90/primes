@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\common.cpp">
+    <ClCompile Include="..\src\common.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="..\primeq.cpp">
+    <ClCompile Include="..\src\primeq.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\common.h">
+    <ClInclude Include="..\src\common.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

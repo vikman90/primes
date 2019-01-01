@@ -9,7 +9,7 @@
 ################################################################################
 
 BIN = bin
-SRC = .
+SRC = src
 
 CXX			= g++ -std=c++11
 CXXFLAGS	= -pipe -Wall -O3 -fopenmp
@@ -30,7 +30,7 @@ pre:
 	$(MKDIR) $(BIN)
 
 clean:
-	$(RMFILE) $(TARGET)
+	$(RMFILE) $(TARGET) $(OBJECTS)
 
 $(BIN)/list: $(SRC)/list.cpp $(SRC)/common.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
@@ -41,6 +41,4 @@ $(BIN)/primeq: $(SRC)/primeq.cpp $(SRC)/common.cpp
 $(BIN)/eratosthenes: $(SRC)/eratosthenes.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
-$(SRC)/list.cpp: $(SRC)/common.h
-$(SRC)/primeq.cpp: $(SRC)/common.h
-$(SRC)/common.cpp: $(SRC)/common.h
+$(TARGET): $(SRC)/common.h

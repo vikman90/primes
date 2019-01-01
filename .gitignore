@@ -45,3 +45,6 @@ bin/*
 
 output.txt
 output.db
+
+# Visual Studio Code
+.vscode
