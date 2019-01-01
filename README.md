@@ -7,11 +7,11 @@ Búsqueda paralela de números primos.
 Para más información sobre este proyecto visita [mi blog](https://vikman90.blogspot.com.es/2014/01/busqueda-paralela-de-numeros-primos.html).
 
 ## Dependencias
-Para compilar este proyecto, el paquete de desarrollo para _SQLite3_ debe estar instalado. _Pandas_ se utiliza para ejecutar el benchmark en Pyton.
+Para compilar este proyecto, el paquete de desarrollo para _SQLite3_ debe estar instalado. _Pandas_ se utiliza para ejecutar el benchmark en Python.
 
 ### Ubuntu
 ```shellsession
-$ sudo apt install libsqlite3-dev python3-pandas
+$ sudo apt install libsqlite3-dev python3-pandas automake
 ```
 
 ### CentOS
@@ -20,23 +20,26 @@ $ sudo yum update
 $ sudo yum install sqlite-devel
 $ sudo yum install epel-release
 $ sudo yum install python-pandas
+$ sudo yum install automake
 ```
 
 ### Arch linux
 ```shellsession
-$ sudo pacman -S python-pandas
+$ sudo pacman -S python-pandas automake
 ```
 
 ## Compilación
-Para compilar el programa, usa el _Makefile_ disponible:
+Para compilar el programa, usa el script de autoconfiguración (_configure_) y `make`:
 ```shellsession
+$ autoreconf -vi
+$ ./configure
 $ make
 ```
 
 ## Ejecución
-Para ejecutar el programa, usa el binario `list` disponible en el directorio `bin`:
+Para ejecutar el programa, usa el binario `list` disponible en el directorio `src`:
 ```shellsession
-$ bin/list [-seq] [-out=off|sqlite|file] <number>
+$ src/list [-seq] [-out=off|sqlite|file] <number>
 ```
 
 * La opción `-seq` se usa para ejecutar el programa en modo secuencial.
@@ -47,7 +50,7 @@ $ bin/list [-seq] [-out=off|sqlite|file] <number>
 ## Ejemplo
 Por ejemplo, para encontrar todos los números primos hasta el 10:
 ```shellsession
-$ bin/list 10
+$ src/list 10
 Encontrados 4 numeros primos.
 Tiempo: 1.5253e-05 seg.
 Tiempo en escribir: 0.000914791 seg.

@@ -29,9 +29,9 @@ def get_dataframe(begin, end, step):
 
     for i in data_series:
         print("Computing for i = {0}".format(i))
-        destructivo_p   = gettime("bin/list -out=off {0}".format(i))
-        destructivo_s   = gettime("bin/list -out=off -seq {0}".format(i))
-        criba           = gettime("bin/eratosthenes -nowrite {0}".format(i))
+        destructivo_p   = gettime("src/list -out=off {0}".format(i))
+        destructivo_s   = gettime("src/list -out=off -seq {0}".format(i))
+        criba           = gettime("src/eratosthenes -nowrite {0}".format(i))
         time_data.ix[i] = [criba, destructivo_p, destructivo_s]
 
     print("\n")
