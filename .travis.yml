@@ -1,0 +1,4 @@
+language: c
+before_install:
+  - sudo apt-get install -y libsqlite3-dev
+script: make
