@@ -22,45 +22,44 @@ using namespace std;
 //------------------------------------------------------------------------------
 
 int main(int argc, char **argv) {
-	int req, max;
-	bool ans;
-	vector<int> vprimes;
-	double time0, time1;
-	enum { parallel, sequential} mode = parallel;
+    int req, max;
+    bool ans;
+    vector<int> vprimes;
+    double time0, time1;
+    enum { parallel, sequential } mode = parallel;
 
-	for (int i = 1; i < argc; i++) {
-		if (!strcmp(argv[i], "-seq"))
-			mode = sequential;
-		else if (!strcmp(argv[i], "--help")) {
-			cout << "Sintaxis: " << argv[0] << " [-seq] <numero>\n";
-			return EXIT_SUCCESS;
-		} else
-			req = atoi(argv[i]);
-	}
-	
-	while (req < 2) {
-		cout << "Numero: ";
-		cin >> req;
-	}
+    for (int i = 1; i < argc; i++) {
+        if (!strcmp(argv[i], "-seq"))
+            mode = sequential;
+        else if (!strcmp(argv[i], "--help")) {
+            cout << "Sintaxis: " << argv[0] << " [-seq] <numero>\n";
+            return EXIT_SUCCESS;
+        } else
+            req = atoi(argv[i]);
+    }
 
-	max = (int)sqrt(req);
-	time0 = omp_get_wtime();
-	
-	if (mode == sequential)
-		search_seq(max, vprimes);
-	else
-		search(max, vprimes);
-		
-	ans = primeq(req, vprimes);
-	time1 = omp_get_wtime();
+    while (req < 2) {
+        cout << "Numero: ";
+        cin >> req;
+    }
 
-	if (ans)
-		cout << "Primo.\n";
-	else
-		cout << "Divisible\n";
-		
-	cout << "Tiempo: " << time1 - time0 << " seg.\n";
-	
-	return EXIT_SUCCESS;
+    max = (int)sqrt(req);
+    time0 = omp_get_wtime();
+
+    if (mode == sequential)
+        search_seq(max, vprimes);
+    else
+        search(max, vprimes);
+
+    ans = primeq(req, vprimes);
+    time1 = omp_get_wtime();
+
+    if (ans)
+        cout << "Primo.\n";
+    else
+        cout << "Divisible\n";
+
+    cout << "Tiempo: " << time1 - time0 << " seg.\n";
+
+    return EXIT_SUCCESS;
 }
-
