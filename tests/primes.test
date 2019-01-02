@@ -1,0 +1,70 @@
+#!/bin/bash
+
+BIN="../src"
+
+echo 1..13 # Number of tests to be executed.
+
+# Eratosthenes until 1000000
+
+output=`$BIN/eratosthenes 1000000 | head -n1`
+
+[ $? = 0 ] || echo -n "not "
+echo "ok - Eratosthenes until 1000000 exit code 0"
+
+[ "$output" = "Encontrados 78498 numeros primos." ] || echo -n "not "
+echo "ok - Eratosthenes until 1000000 finds 78498 prime numbers"
+
+[ `shasum output.txt | awk '{print $1;}'` = "30f06cbe7fde688cc70786b4c055fe58a28ead0c" ] || echo -n "not "
+echo "ok - Eratosthenes until 1000000 output hash"
+
+# Eratosthenes with no input timeout
+
+timeout 2 $BIN/eratosthenes > /dev/null
+
+[ $? = 124 ] && echo -n "not "
+echo "ok - Eratosthenes with no input # TODO"
+
+# List until 1000000
+
+output=`$BIN/list 1000000 | head -n1`
+
+[ $? = 0 ] || echo -n "not "
+echo "ok - Prime list until 1000000 exit code 0"
+
+[ "$output" = "Encontrados 78498 numeros primos." ] || echo -n "not "
+echo "ok - Prime list until 1000000 finds 78498 prime numbers"
+
+[ `shasum output.txt | awk '{print $1;}'` = "30f06cbe7fde688cc70786b4c055fe58a28ead0c" ] || echo -n "not "
+echo "ok - Prime list until 1000000 output hash"
+
+# List with no input timeout
+
+timeout 2 $BIN/list > /dev/null
+
+[ $? = 124 ] && echo -n "not "
+echo "ok - List with no input # TODO"
+
+# Primality test
+
+output=`$BIN/primeq 2000000011 | head -n1`
+
+[ $? = 0 ] || echo -n "not "
+echo "ok - Primality test for 2000000011 exit code 0"
+
+[ "$output" = "Primo." ] || echo -n "not "
+echo "ok - Primality test for 2000000011 correct output"
+
+output=`$BIN/primeq 2000000013 | head -n1`
+
+[ $? = 0 ] || echo -n "not "
+echo "ok - Primality test for 2000000013 exit code 0"
+
+[ "$output" = "Divisible" ] || echo -n "not "
+echo "ok - Primality test for 2000000013 correct output"
+
+# Primality test with no input timeout
+
+timeout 2 $BIN/primeq > /dev/null
+
+[ $? = 124 ] && echo -n "not "
+echo "ok - List with no input"

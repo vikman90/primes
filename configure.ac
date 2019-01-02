@@ -25,5 +25,6 @@ AC_CHECK_HEADERS([sqlite3.h], [], [AC_MSG_ERROR(No SQLite3 headers found.)])
 # Checks for library functions.
 AC_CHECK_FUNCS([sqrt])
 
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile])
+AC_REQUIRE_AUX_FILE([tap-driver.sh])
 AC_OUTPUT
