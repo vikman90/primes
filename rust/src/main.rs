@@ -16,7 +16,6 @@ fn main() {
     let now = Instant::now();
     sieve(&mut primes);
     let duration = now.elapsed();
-    primes.sort();
 
     for i in primes {
         println!("{}", i);
@@ -26,27 +25,16 @@ fn main() {
 }
 
 fn sieve(primes: &mut Vec<u32>) {
-    // Bug: leaks some values due to swapping and j=i+1.
-
     let bound = (*primes.last().unwrap() as f64).sqrt() as u32;
 
-    let mut i = 0;
-    while i < primes.len() {
+    for i in 0..primes.len() {
+        let p_i = primes[i];
+
         if primes[i] > bound {
-            i += 1;
-            continue;
+            break;
         }
 
-        let mut j = i + 1;
-        while j < primes.len() {
-            if primes[j] % primes[i] == 0 {
-                primes.swap_remove(j);
-            } else {
-                j += 1;
-            }
-        }
-
-        i += 1;
+        primes.retain(|&x| x == p_i || x % p_i != 0);
     }
 }
 
