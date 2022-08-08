@@ -1,4 +1,4 @@
-// Sieve of Eratosthenes
+// Sieve of Eratosthenes and Sundram
 // Rust version
 // Copyleft 2022 Vikman Fernandez-Castro - All rights revoked.
 // August 6, 2022
@@ -8,13 +8,13 @@ use std::process::exit;
 use std::time::{Instant};
 
 mod sieve;
-use sieve::Sieve;
+use sieve::{Eratosthenes,Sundram};
 
 const DEFAULT_SIZE: usize = 1000000;
 
 fn main() {
     let size = parse_args();
-    let mut sieve = Sieve::new(size);
+    let mut sieve = Sundram::new(size);
 
     let now = Instant::now();
     sieve.find_primes();
