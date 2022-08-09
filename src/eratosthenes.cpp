@@ -1,6 +1,6 @@
 /*
  * SIEVE OF ERATOSTHENES
- * Ver. 1.0
+ * Ver. 1.1
  *
  * Syntax: ./eratosthenes [-nowrite] <max>
  *
@@ -9,11 +9,10 @@
  */
 
 #include <iostream>
-#include <fstream>
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
-#include <list>
+#include <vector>
 #include <omp.h>
 
 #define OUTPUT_FILENAME "output.txt"
@@ -21,49 +20,43 @@
 using namespace std;
 
 // Computes the sieve of Eratosthenes
-void sieve(list<int> &lprimes);
+void sieve(vector<bool> &primes);
 
-// Save a list into "filename"
-void save(const char *filename, const list<int> &lprimes);
+// Print a list into stdout
+void print(const vector<bool> &primes);
 
 //------------------------------------------------------------------------------
 
 int main(int argc, char **argv) {
     int max = 0;
     bool write = true;
-    list<int> lprimes;
     double t0, t1;
 
     for (int i = 1; i < argc; i++) {
-        if (!strcmp(argv[i], "-nowrite"))
-            write = false;
-        else if (!strcmp(argv[i], "--help")) {
-            cout << "Sintaxis: " << argv[0] << " [-nowrite] <max>\n";
+        if (!strcmp(argv[i], "--help")) {
+            cout << "Syntax: " << argv[0] << " [MAX]\n";
             return EXIT_SUCCESS;
-        } else
+        } else {
             max = atoi(argv[i]);
+        }
     }
 
     while (max < 2) {
-        cout << "Maximo: ";
+        cout << "Enter max number: ";
         cin >> max;
     }
 
-    for (int i = 2; i <= max; i++)
-        lprimes.push_back(i);
+    vector<bool> primes(max + 1, true);
 
     t0 = omp_get_wtime();
-    sieve(lprimes);
+    sieve(primes);
     t1 = omp_get_wtime();
 
-    cout << "Encontrados " << lprimes.size() << " numeros primos.\n";
-    cout << "Tiempo: " << t1 - t0 << " seg.\n";
+    cerr << "Time: " << (t1 - t0) * 1000 << " ms.\n";
 
-    if (write) {
-        t0 = t1;
-        save(OUTPUT_FILENAME, lprimes);
-        cout << "Tiempo en escribir: " << omp_get_wtime() - t0 << " seg.\n";
-    }
+    t0 = t1;
+    print(primes);
+    cerr << "Time to write: " << (omp_get_wtime() - t0) * 1000 << " ms.\n";
 
     return EXIT_SUCCESS;
 }
@@ -71,40 +64,26 @@ int main(int argc, char **argv) {
 //------------------------------------------------------------------------------
 // Computes the sieve of Eratosthenes
 
-void sieve(list<int> &lprimes) {
-    int last = lprimes.back();
-    const int bound = (int)sqrt(last);
-    list<int>::iterator iti, itj;
+void sieve(vector<bool> &primes) {
+    const unsigned size = primes.size() - 1;
+    const unsigned bound = (int)sqrt(size);
 
-    for (iti = lprimes.begin(); iti != lprimes.end(); ++iti) {
-        int cur = *iti;
-
-        if (cur > bound)
-            break;
-
-        itj = iti;
-        ++itj;
-
-        while (itj != lprimes.end()) {
-            if (*itj % cur == 0)
-                itj = lprimes.erase(itj);
-            else
-                ++itj;
+    for (unsigned i = 2; i <= bound; i++) {
+        if (primes[i]) {
+            for (unsigned j = i * i; j <= size; j += i) {
+                primes[j] = false;
+            }
         }
     }
 }
 
 //------------------------------------------------------------------------------
-// Save a list into "filename"
+// Print a list into stdout
 
-void save(const char *filename, const list<int> &lprimes) {
-    ofstream file(filename);
-
-    if (!file) {
-        cerr << "Error de apertura del archivo " << filename << endl;
-        return;
+void print(const vector<bool> &primes) {
+    for (unsigned i = 2; i < primes.size(); i++) {
+        if (primes[i]) {
+            cout << i << endl;
+        }
     }
-
-    for (list<int>::const_iterator it = lprimes.begin(); it != lprimes.end(); ++it)
-        file << *it << endl;
 }
